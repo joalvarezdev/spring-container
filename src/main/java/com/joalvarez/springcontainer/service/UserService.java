@@ -8,7 +8,6 @@ import com.joalvarez.springcontainer.exception.generals.NotImplementedException;
 import com.joalvarez.springcontainer.service.generals.GenericService;
 import com.joalvarez.springcontainer.service.interfaces.IRoleService;
 import com.joalvarez.springcontainer.service.interfaces.IUserService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,13 +21,9 @@ import java.util.UUID;
 public class UserService extends GenericService<UserDAO, UserMapper> implements IUserService<UserDTO> {
 
 	private final IRoleService<RoleDTO> roleService;
-	private final PasswordEncoder passwordEncoder;
-
-	public UserService(UserDAO userDAO, UserMapper mapper, RoleService roleService,
-					   PasswordEncoder passwordEncoder) {
+	public UserService(UserDAO userDAO, UserMapper mapper, RoleService roleService) {
 		super(userDAO, mapper);
 		this.roleService = roleService;
-		this.passwordEncoder = passwordEncoder;
 	}
 
 	@Override
@@ -67,14 +62,11 @@ public class UserService extends GenericService<UserDAO, UserMapper> implements 
 			userDTO.setUserId(UUID.randomUUID());
 		}
 
-		userDTO.setPassword(this.passwordEncoder.encode(userDTO.getPassword()));
-
 		UserDTO userSaved = this.mapper.toDTO(this.dao.save(this.mapper.fromDTO(userDTO)));
 
 		userSaved.setAdmin(userDTO.isAdmin());
 
 		return userSaved;
-
 	}
 
 }
