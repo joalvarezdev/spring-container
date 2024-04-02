@@ -41,7 +41,7 @@ api.security:
   origins:
     - "*"
   endpoints:
-    - path: /example/**
+    - path: /products/**
       authorities: [ADMIN, USER]
 
 jwt:

@@ -36,6 +36,15 @@ databaseChangeLog:
             path: ddl/03-user_roles.sql
             relativeToChangeLogFile: true
             endDelimiter: ;
+  - changeSet:
+      id: products
+      author: joalvarez
+      runOnChange: true
+      changes:
+        - sqlFile:
+            path: ddl/04-products.sql
+            relativeToChangeLogFile: true
+            endDelimiter: ;
 
 # REGISTRY
   - changeSet:
