@@ -1,36 +1,23 @@
 package com.joalvarez.springcontainer.config;
 
+import com.joalvarez.springcontainer.interceptor.TenantInterceptor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
-//@Configuration
+@Configuration
 public class FilterConfig implements WebMvcConfigurer {
 
-	//private final TenantInterceptor tenantInterceptor;
+	private final TenantInterceptor tenantInterceptor;
 
-/*
 	public FilterConfig (TenantInterceptor tenantInterceptor) {
 		this.tenantInterceptor = tenantInterceptor;
 	}
-*/
 
-/*
-	private static final List<String> EXCLUDE_PATH = Stream.of(
-		"/v3/api-docs/**",
-		"/swagger-ui/**",
-		"/swagger-ui.html",
-		"/swagger-resources/**",
-		"/webjars/**",
-		"/auth/login"
-	).toList();
-*/
-
-/*
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(this.tenantInterceptor)
-			.excludePathPatterns(EXCLUDE_PATH);
+			.addPathPatterns("/products/**");
 	}
-*/
 }

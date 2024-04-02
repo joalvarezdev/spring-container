@@ -42,8 +42,9 @@ public class JwtValidationFilter extends OncePerRequestFilter {
 			var authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(stringAuthorities);
 
 			var authenticationToken = new UsernamePasswordAuthenticationToken(username, null, authorities);
+			authenticationToken.setDetails(token);
 
-			SecurityContextHolder.createEmptyContext().setAuthentication(authenticationToken);
+			SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 		}
 		chain.doFilter(request, response);
 	}
