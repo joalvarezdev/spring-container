@@ -5,8 +5,11 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.joalvarez.springcontainer.constants.ErrorCode;
 import com.joalvarez.springcontainer.data.model.User;
+import com.joalvarez.springcontainer.exception.generals.GenericException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
@@ -60,8 +63,7 @@ public class Jwts {
 
 			verifier.verify(token);
 		} catch (JWTVerificationException e) {
-			System.out.println(e.getMessage());
-			System.out.println("Token invalid, not Authorized");
+			throw new GenericException(HttpStatus.UNAUTHORIZED, ErrorCode.USER_BAD_CREDENTIALS);
 		}
 	}
 

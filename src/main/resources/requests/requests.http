@@ -6,3 +6,16 @@ Content-Type: application/json
   "username": "admin",
   "password": "{{password}}"
 }
+
+### FIND ALL PRODUCTS
+GET {{base-url}}/products
+Authorization: Bearer {{admin-token}}
+
+### CREATE PRODUCTS
+POST {{base-url}}/products
+Authorization: Bearer {{admin-token}}
+Content-Type: application/json
+
+{
+  "name": "producto1"
+}
