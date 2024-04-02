@@ -1,0 +1,58 @@
+databaseChangeLog:
+# TABLES
+  - changeSet:
+      id: extensions
+      author: joalvarez
+      runOnChange: true
+      changes:
+        - sqlFile:
+            path: ddl/00-extensions.sql
+            relativeToChangeLogFile: true
+            endDelimiter: ;
+  - changeSet:
+      id: users
+      author: joalvarez
+      runOnChange: true
+      changes:
+        - sqlFile:
+            path: ddl/01-users.sql
+            relativeToChangelogFile: true
+            endDelimiter: ;
+  - changeSet:
+      id: roles
+      author: joalvarez
+      runOnChange: true
+      changes:
+        - sqlFile:
+            path: ddl/02-roles.sql
+            relativeToChangeLogFile: true
+            endDelimiter: ;
+  - changeSet:
+      id: user_roles
+      author: joalvarez
+      runOnChange: true
+      changes:
+        - sqlFile:
+            path: ddl/03-user_roles.sql
+            relativeToChangeLogFile: true
+            endDelimiter: ;
+
+# REGISTRY
+  - changeSet:
+      id: registry_roles
+      author: joalvarez
+      runOnChange: true
+      changes:
+        - sqlFile:
+            path: dml/01-roles.sql
+            relativeToChangeLogFile: true
+            endDelimiter: ;
+  - changeSet:
+      id: user_admin
+      author: joalvarez
+      runOnChange: true
+      changes:
+        - sqlFile:
+            path: dml/02-users.sql
+            relativeToChangeLogFile: true
+            endDelimiter: ;
