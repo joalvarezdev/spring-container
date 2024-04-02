@@ -2,7 +2,7 @@ package com.joalvarez.springcontainer.controller;
 
 import com.joalvarez.springcontainer.data.dto.ProductDTO;
 import com.joalvarez.springcontainer.service.interfaces.IProductService;
-import io.swagger.v3.oas.annotations.security.SecurityRequirements;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("products")
-@SecurityRequirements
+@SecurityRequirement(name = "Bearer Authentication")
 public class ProductController {
 
 	private final IProductService service;

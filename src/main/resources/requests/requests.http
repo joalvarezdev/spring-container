@@ -1,10 +1,32 @@
-### Login
+### LOGIN
 POST {{base-url}}/auth/login
 Content-Type: application/json
 
 {
   "username": "admin",
   "password": "{{password}}"
+}
+
+### LOGIN | user1
+POST {{base-url}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "password": "user1"
+}
+
+### REGISTER
+POST {{base-url}}/auth/register
+Authorization: Bearer {{admin-token}}
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "password": "user1",
+  "email": "user1@gmail.com",
+  "enabled": true,
+  "isAdmin": false
 }
 
 ### FIND ALL PRODUCTS
@@ -17,5 +39,19 @@ Authorization: Bearer {{admin-token}}
 Content-Type: application/json
 
 {
-  "name": "producto1"
+  "name": "producto2"
 }
+
+### FIND ALL PRODUCTS | USER1
+GET {{base-url}}/products
+Authorization: Bearer {{user1-token}}
+
+### CREATE PRODUCT | USER1
+POST {{base-url}}/products
+Authorization: Bearer {{user1-token}}
+Content-Type: application/json
+
+{
+  "name": "producto1-user1"
+}
+

@@ -3,10 +3,13 @@ package com.joalvarez.springcontainer.config.security;
 import com.joalvarez.springcontainer.config.security.constants.SecurityProperties;
 import com.joalvarez.springcontainer.config.security.jwt.JwtValidationFilter;
 import com.joalvarez.springcontainer.config.security.jwt.Jwts;
+import com.joalvarez.springcontainer.service.ImplUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -60,6 +63,14 @@ public class SecurityConfig {
 			.formLogin(AbstractHttpConfigurer::disable)
 			.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 			.build();
+	}
+
+	@Bean
+	public AuthenticationProvider authenticationProvider(ImplUserDetailsService userService) {
+		var provider = new DaoAuthenticationProvider();
+		provider.setPasswordEncoder(this.passwordEncoder());
+		provider.setUserDetailsService(userService);
+		return provider;
 	}
 
 	@Bean

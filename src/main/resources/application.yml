@@ -43,6 +43,8 @@ api.security:
   endpoints:
     - path: /products/**
       authorities: [ADMIN, USER]
+    - path: /auth/register
+      authorities: [ADMIN]
 
 jwt:
   secret-key: ${SECRET_KEY}
